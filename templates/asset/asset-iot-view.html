@@ -1,0 +1,52 @@
+{% extends 'base/iot_content_base.html' %}
+
+{% block Title %}IOT-数据可视化{% endblock %}
+
+{% block Head %}
+
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/echarts.js') }}"></script>
+
+{% endblock %}
+
+{% block SubNavitation %}
+    <ul>
+        <li><a href="/asset/iot/1">概览</a></li>
+        <li><a href="/asset/iot/2">设备管理</a></li>
+        <li><a href="/asset/iot/3">数据管理</a></li>
+        <li class="active"><a href="/asset/iot/4">数据可视化</a></li>
+    </ul>
+{% endblock %}
+
+{% block MainContainer %}
+
+        <div id="dv-index" class="well well-lg">
+            <span>
+                <h4>数据可视化</h4>
+                <p>通过本页，你可以查看到实时数据；并将数据显示在可视化图表的上面</p>
+                <ul>
+                    <li>实时记录设备数据.</li>
+                    <li>实时更新设备数据.</li>
+                </ul>&nbsp;
+            </span>
+        </div>
+        <hr>
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div class="panel panel-default" style="height: 500px;width: inherit">
+			<div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/device.png') }}">&ensp;DataView</div>
+			<div class="panel-body">
+                <div id="dv-first" style="height: 450px;width: 1000px"></div>
+			</div>
+		</div>
+        <div class="panel panel-default" style="height: 500px;width: inherit">
+			<div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/device.png') }}">&ensp;DataView2</div>
+			<div class="panel-body">
+                <div id="dv-second" style="height: 450px;width: 1000px"></div>
+			</div>
+		</div>
+
+{% endblock %}
+
+{% block TailContainer %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/asset-iot-view.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'base/iot_content_base.html' %}
+
+{% block Title %}IOT-概览{% endblock %}
+
+{% block Head %}
+    <style>
+        .ov-main{
+            height: 624px;
+            width: 1226px;
+            margin-top: 20px;
+            background-color: #ffffff;
+        }
+        .ov-first{
+            height: 300px;
+            width: 1226px;
+            padding-top: 10px;
+            padding-left: 10px;
+            background-color: #d43f3a;
+            border:2px solid #848484;
+            border-bottom:3px solid #848484;
+
+        }
+        .ov-second{
+            height: 300px;
+            width: 608px;
+            margin-top: 20px;
+            background-color: #ffffff;
+        }
+        .ov-third{
+            height: 300px;
+            width: 608px;
+            margin-top: 20px;
+            margin-left: 10px;
+            background-color: #ffffff;
+        }
+        .div-line{
+            display: inline;
+            float: left;
+        }
+
+    </style>
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/echarts.js') }}"></script>
+
+{% endblock %}
+
+{% block SubNavitation %}
+    <ul>
+        <li class="active"><a href="/asset/iot/1">概览</a></li>
+        <li><a href="/asset/iot/2">设备管理</a></li>
+        <li><a href="/asset/iot/3">数据管理</a></li>
+        <li><a href="/asset/iot/4">数据可视化</a></li>
+    </ul>
+{% endblock %}
+
+{% block MainContainer %}
+
+    <h3>概况</h3>
+
+    <div id="ov-main" class="ov-main">
+
+        <div id="ov-first" class="panel panel-default" style="background: #ffffff">
+            <div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/data-logo.png') }}">&ensp;实时状况</div>
+            <div class="panel-body">
+                <div id="ov-first-content-1" class="div-line" style="height:280px;width: 800px;"></div>
+                <div id="ov-first-content-2" class="div-line" style="height:280px;width: 370px;padding-top: 40px; margin-left: 20px">
+                    <div style="height: 40px;width: inherit">
+                        <div>
+                            <span>设备数量</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <span>{{ devicesum|default('0') }}/{{ deviceonline|default('0') }}个</span>
+                        </div>
+                        <div class="progress" style="height: 8px">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: {{ device_num_progress }}%;">
+                                <span class="sr-only">0% 完成</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 40px;width: inherit">
+                        <div>
+                            <span>数据存储</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <span>{{ devicesum|default('0') }}/{{ deviceonline|default('0') }}个</span>
+                        </div>
+                        <div class="progress" style="height: 8px">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: {{ data_storage_progress }}%;">
+                                <span class="sr-only">0% 完成</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 40px;width: inherit">
+                        <div>
+                            <span>系统负载</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <span>{{ devicesum|default('0') }}/{{ deviceonline|default('0') }}个</span>
+                        </div>
+                        <div class="progress" style="height: 8px">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: {{ sys_load_progress }}%;">
+                                <span class="sr-only">0% 完成</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 40px;width: inherit">
+                        <div>
+                            <span>系统内存</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <span>{{ devicesum|default('0') }}/{{ deviceonline|default('0') }}个</span>
+                        </div>
+                        <div class="progress" style="height: 8px">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: {{ sys_ram_progress }}%;">
+                                <span class="sr-only">0% 完成</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 50px;width: inherit">
+                        <button type="button" class="btn btn-default btn-lg " style="width: 150px">设备管理</button>
+                        <button type="button" class="btn btn-default btn-lg " style="width: 150px;margin-left: 50px">用户管理</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ov-second" class="ov-second div-line panel panel-default" style="float: left;">
+            <div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/data-logo2.png') }}">&ensp;设备状态统计</div>
+            <div class="panel-body">
+                <div id="ov-second-content">
+                    <div id="secondPieChart" style="height: 240px;width: 580px"></div>
+                </div>
+            </div>
+        </div>
+        <div id="ov-third" class="ov-third div-line panel panel-default" style="float: left;">
+            <div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/data-logo2.png') }}">&ensp;设备上下线统计</div>
+            <div class="panel-body">
+                <div id="ov-third-content">
+                    <div id="thirdLineChart" style="height: 240px;width: 580px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block TailContainer %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/asset-iot-overview.js') }}"></script>
+{% endblock %}

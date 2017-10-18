@@ -1,0 +1,12 @@
+.navbar-title{
+    height: 50px;
+    margin-right: 2px;
+}
+
+.copyright{
+    color: #5bc0de;
+    position: fixed;
+    left: 0px;
+    bottom: 5px;
+}
+

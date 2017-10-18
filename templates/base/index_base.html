@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block Title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    {% block Head %}{% endblock %}
+</head>
+<body>
+
+        <nav role="navigation" class="navbar navbar-inverse dark-nav">
+        <div class="navbar-header">
+            <button data-target="#bs-example-navbar-collapse-3" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img class="navbar-title" src="{{ url_for('static', filename='images/logo.jpg') }}">
+        </div>
+        <div id="bs-example-navbar-collapse-3" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home">主页</a></li>
+                <li><a href="/asset/iot/">物联网</a></li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">更多 <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="/asset/asset_login">登录</a></li>
+                        <li><a href="/asset/asset_logout">注销</a></li>
+                        <li><a href="#">测试</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/asset/">控制台</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="maincontainer">
+
+        {% block MainContainer %}{% endblock %}
+
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

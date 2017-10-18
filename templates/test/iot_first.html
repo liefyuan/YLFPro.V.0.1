@@ -1,0 +1,139 @@
+{% extends 'base/index_base.html' %}
+
+{% block Title %}iot_Debuger{% endblock %}
+
+{% block Head %}
+
+    <style>
+        .container_{
+            padding-left: 75px;
+            height: 280px;
+
+        }
+        .panel{
+            height: 400px;
+            width: 400px;
+        }
+        .information{
+            padding-top: 70px;
+            padding-left: 50px;
+        }
+        .reciever{
+            padding-top: 70px;
+            padding-left: 50px;
+
+        }
+        .sender{
+            padding-top: 70px;
+            padding-left: 50px;
+        }
+        .div-line{
+            display: inline;
+            float: left;
+        }
+    </style>
+
+{% endblock %}
+
+{% block MainContainer %}
+
+        <div class="container_">
+        <div class="information div-line" style="float: left;">
+            <div class="panel panel-success" >
+                <div class="panel-heading"><h3 class="panel-title">基本信息</h3></div>
+                <div class="panel-body" id="Infor_content"></div>
+            </div>
+            <div id="refreshInforBtn" class="bs-example div-line">
+                <button type="button" class="btn btn-primary">刷新</button>
+            </div>
+            <div id="clearInforBtn" class="bs-example div-line" style="padding-left: 50px">
+                <button type="button" class="btn btn-primary">清空</button>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+            $("#clearInforBtn").click(function () {
+
+                $("#Infor_content").empty();
+
+            });
+
+            $("#refreshInforBtn").click(function () {
+                $.ajax({
+                    url:'/api/v0.1/iot_first/', success:function (data) {
+                        //alert(data);
+                        $("#Infor_content").append(data);
+                    }
+                });
+            });
+        });
+        </script>
+
+        <div class="reciever div-line" style="float: left;">
+            <div class="panel panel-success" >
+                <div class="panel-heading"><h3 class="panel-title">接收到的信息</h3></div>
+                <div class="panel-body" id="Receiver_content"></div>
+            </div>
+            <div id="refreshRecBtn" class="bs-example div-line">
+                <button type="button" class="btn btn-primary">刷新</button>
+            </div>
+            <div id="clearRecBtn" class="bs-example div-line" style="padding-left: 50px">
+                <button type="button" class="btn btn-primary">清空</button>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                setInterval("ajaxGetdata()",1000);
+            $("#clearRecBtn").click(function () {
+               $("#Receiver_content").empty();//清空面板数据
+            });
+             $("#refreshRecBtn").click(function () {
+                $.ajax({
+                    url:'/api/v0.1/iot_first/', success:function (data) {
+                        //alert(data);
+                        $("#Receiver_content").append(data);
+                    }
+                });
+            });
+        });
+            function ajaxGetdata()
+            {
+                $.ajax({
+                    url:'/api/v0.1/iot_first/', success:function (data) {
+                        //alert(data);
+                        $("#Receiver_content").empty();
+                        $("#Receiver_content").append(data);
+                    }
+                });
+            }
+        </script>
+
+        <div class="sender div-line" style="float: left;">
+            <div class="panel panel-success">
+                <div class="panel-heading"><h3 class="panel-title">发送的消息</h3></div>
+                <input id="sender_content" class="form-control" style="height: 91%"  placeholder="输入要发送的信息">
+            </div>
+            <div id="sendBtn" class="bs-example div-line">
+                <button type="button" class="btn btn-primary">发送</button>
+            </div>
+            <div id="clearBtn" class="bs-example div-line" style="padding-left: 50px">
+                <button type="button" class="btn btn-primary">清空</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#clearBtn").click(function () {
+                document.getElementById("sender_content").value=""; // 清空输入面板
+            });
+            $("#sendBtn").click(function () {
+                $.ajax({
+                    url:'/api/v0.1/iot_first/',type:'POST', success:function (data) {
+                        // alert(data);
+                        document.getElementById("sender_content").value=data;
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

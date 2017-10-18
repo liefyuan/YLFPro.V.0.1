@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Asset</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/iot-content.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/iot-nav.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/echarts.js') }}"></script>
+</head>
+<body>
+    <nav role="navigation" class="navbar navbar-inverse dark-nav">
+        <div class="navbar-header">
+            <button data-target="#bs-example-navbar-collapse-3" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img class="navbar-title" src="{{ url_for('static', filename='images/logo.jpg') }}">
+        </div>
+        <div id="bs-example-navbar-collapse-3" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">主页</a></li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">更多 <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="/asset/asset_login">登录</a></li>
+                        <li><a href="/asset/asset_logout">注销</a></li>
+                        <li><a href="#">测试</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/asset/">控制台</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div  role="navigation" id="nav">
+        <ul>
+            <li>
+                <img id="management-logo" src="{{ url_for('static', filename='images/management.png') }}">
+                <b id="management-text">管理员中心</b>
+            </li>
+        </ul>
+
+    </div>
+    <div role="main" class="panel panel-default main" style="border-radius:0px;border:0;margin-bottom: 0">
+        <div class="panel-heading main-panel-heading" style="border-radius:0px;color:#ffffff;">
+            <h3 class="panel-title">
+                <img onclick="onclick_refresh()" src="{{ url_for('static', filename='images/refresh.png') }}" alt="点击刷新"> &ensp;
+                管理员中心 / {{ route|default('概况') }}
+            </h3>
+            <script>function onclick_refresh() {alert('点击了刷新！');}</script>
+        </div>
+        <div class="panel-body">
+            <a href="#nav" id="toggle">Menu</a>
+            <div>
+              <h1 class="page-header" style="text-align: center">网站监控台</h1>
+
+              <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                  <div id="echartsPie1" style="width: 300px;height:300px;"></div>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                  <div id="echartsPie2" style="width: 300px;height:300px;"></div>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                  <div id="echartsPie3" style="width: 300px;height:300px;"></div>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                  <div id="echartsPie4" style="width: 300px;height:300px;"></div>
+                </div>
+              </div>
+              <hr/>
+                <div id="asset-line" style="height:300px;"></div>
+              <hr/>
+                <div id="asset-line2" style="height:300px;"></div>
+              <hr/>
+              <h2 class="sub-header" style="text-align: center">请求发起的原始数据</h2>
+              <div>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>编号</th>
+                      <th>请求IP地址</th>
+                      <th>请求时间</th>
+                      <th>请求方法</th>
+                      <th>其他</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for data in datas %}
+                        <tr>
+                            <td>{{ data.num }}</td>
+                            <td>{{ data.ip }}</td>
+                            <td>{{ data.time }}</td>
+                            <td>{{ data.method }}</td>
+                            <td>{{ data.other }}</td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <span>Copyright &copy; <a href="http://www.liefyuan.top/">似水流年</a></span> |
+                    <span><a href="http://www.miibeian.gov.cn/" target="_blank"> 湘ICP备16019866号</a></span> |
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- 将下面这段代码放置在 </body> 之前 -->
+<script src="{{ url_for('static', filename='js/asset.js') }}"></script>
+</body>
+{% block TailContainer %}{% endblock %}
+</html>

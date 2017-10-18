@@ -1,0 +1,59 @@
+{% extends 'base/iot_content_base.html' %}
+
+{% block Title %}IOT-数据管理{% endblock %}
+
+{% block Head %}
+
+{% endblock %}
+
+{% block SubNavitation %}
+    <ul xmlns:border="http://www.w3.org/1999/xhtml">
+        <li><a href="/asset/iot/1">概览</a></li>
+        <li><a href="/asset/iot/2">设备管理</a></li>
+        <li class="active"><a href="/asset/iot/3">数据管理</a></li>
+        <li><a href="/asset/iot/4">数据可视化</a></li>
+    </ul>
+{% endblock %}
+
+{% block MainContainer %}
+
+    <div id="da-main" class="da-main">
+        <div class="well well-lg">
+            <span>
+                <h4>数据管理</h4>
+                <p>通过本页，您可以查看每个设备产生的历史，实时数据：</p>
+                <ul>
+                    <li>设备数据均存储在数据库中；</li>
+                    <li>设备的历史数据查看；</li>
+                    <li>设备的实时数据查看和可视化图表展示。</li>
+                </ul>
+            </span>
+        </div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/device.png') }}">&ensp;原始数据</div>
+			<div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>地区</th>
+                        <th>经纬度</th>
+
+                    </thead>
+                    <tbody>
+                        {% for data in datas %}
+                            <tr>
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.value }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+			</div>
+		</div>
+    </div>
+
+{% endblock %}
+
+{% block TailContainer %}
+    <script src="{{ url_for('static', filename='js/asset-iot-data.js') }}"></script>
+{% endblock %}

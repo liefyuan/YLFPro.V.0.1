@@ -1,0 +1,65 @@
+{% extends 'base/index_base.html' %}
+
+{% block Title %}TCP_Test{% endblock %}
+
+{% block MainContainer %}
+
+    <div class="container">
+        <h2 style="text-align: center">TCP透传测试助手</h2>
+        <h5>使用TCP客户端连接下方TCP服务器，所有客户端及该页面发往TCP服务器的数据将被转发至其余的客户端。</h5>
+        <div class="well well-lg" style="height: 300px;">
+            <span>
+
+            </span>
+        </div>
+
+
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <a id="select-format">ASCII</a>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a id="wait-format">HEX</a></li>
+                </ul>
+            </div><!-- /btn-group -->
+            <input type="text" class="form-control">
+        </div><!-- /input-group -->
+        <div style="margin-top: 20px">
+            <button type="button" class="btn btn-success"><span>发送数据</span></button>
+            <button type="button" class="btn btn-danger" style="margin-left: 10px"><span>清空接收</span></button>
+        </div>
+
+        <hr/>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>客户端IP及端口</th>
+                        <th>动作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>127.0.0.1</td>
+                        <td>无数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr/>
+        <footer style="bottom: 0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span>Copyright &copy; <a href="http://www.liefyuan.top/">似水流年</a></span> |
+                        <span><a href="http://www.miibeian.gov.cn/" target="_blank"> 湘ICP备16019866号</a></span> |
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/tcp-test.js') }}"></script>
+{% endblock %}

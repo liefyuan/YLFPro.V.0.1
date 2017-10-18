@@ -1,0 +1,111 @@
+{% extends 'base/iot_content_base.html' %}
+
+{% block Title %}IOT-设备管理{% endblock %}
+
+{% block Head %}
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/echarts.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/china.js') }}"></script>
+
+{% endblock %}
+
+{% block SubNavitation %}
+    <ul>
+        <li><a href="/asset/iot/1">概览</a></li>
+        <li class="active"><a href="/asset/iot/2">设备管理</a></li>
+        <li><a href="/asset/iot/3">数据管理</a></li>
+        <li><a href="/asset/iot/4">数据可视化</a></li>
+    </ul>
+{% endblock %}
+
+{% block MainContainer %}
+
+    <div id="de-main" class="de-main">
+        <div class="well well-lg">
+            <span>
+                <h4>设备管理</h4>
+                <p>通过本页，您可以增删改查设备，从而实现云平台对设备的管控功能：</p>
+                <ul>
+                    <li>设备可以在允许的情况下入网，从而保证用户的设备安全；</li>
+                    <li>设备的数据均存放在数据库中；</li>
+                    <li>为开发者提供的调试功能：自定义数据发送给设备、也可以监控设备产生的数据。</li>
+                </ul>
+            </span>
+        </div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/device.png') }}">&ensp;活跃设备</div>
+			<div class="panel-body">
+				<div>
+                    <form class="bs-example bs-example-form" role="form">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">搜索</button>
+                                    </span>
+                                    <input type="text" class="form-control">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </form>
+                </div>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">免费域名注册</li>
+				<li class="list-group-item">免费 Window 空间托管</li>
+				<li class="list-group-item">图像的数量</li>
+				<li class="list-group-item">24*7 支持</li>
+				<li class="list-group-item">每年更新成本</li>
+			</ul>
+		</div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/device.png') }}">&ensp;设备热点图</div>
+            <div class="panel-body" style="width: inherit;height: 530px;">
+                <div id="hot-map" style="height: inherit;width: inherit">
+
+                </div>
+            </div>
+        </div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background: #666;color:#ffffff;">
+				<h3 class="panel-title"><img src="{{ url_for('static', filename='images/device.png') }}">&ensp;新设备</h3>
+			</div>
+			<div class="panel-body">
+				这是一个基本的面板
+			</div>
+			<table class="table">
+				<th>产品</th><th>价格 </th>
+				<tr><td>产品 A</td><td>200</td></tr>
+				<tr><td>产品 B</td><td>400</td></tr>
+			</table>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background: #666;color:#ffffff;"><img src="{{ url_for('static', filename='images/send-logo.png') }}">&ensp;向设备发送数据/消息</div>
+			<div class="well well-lg" style="margin: 10px">
+                <span>
+                    <h3>TCP网络调试</h3>
+                    <ul>
+                        <li>使用TCP客户端连接下面TCP服务器。</li>
+                        <li>客户端发送到服务器的数据将显示在下面显示框中。</li>
+                    </ul>
+                </span>
+            </div>
+            <div>
+                <div id="receiver-div"></div>
+                <div id="device-div"></div>
+                <div id="sender-div"></div>
+                <form action="/asset">
+
+                </form>
+            </div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block TailContainer %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/asset-iot-device.js') }}"></script>
+{% endblock %}
